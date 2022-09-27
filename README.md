@@ -31,7 +31,7 @@ https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_for
 <br>
 
 📦 <b id="prefab">Prefab.gd</b>  
-Simple prefab script that takes existing sets of nodes in your scene and packs them into a neat little package that can be pasted later
+Prefab script that takes existing sets of nodes in your scene and packs them into a neat little package that can be pasted later. Think copy paste
 
 Usage:
 - Create a prefab by calling `Prefab.new(Node, free_original = false)`
@@ -55,7 +55,7 @@ Usage:
 A script full of simple static functions
 
 Usage:
-- Get file names in folder with  
+- Get file names in folder  
 `Utils.get_files_in_folder(path, extension = "", full_path = false, starts_with = "", max_items = 999) -> Array`
 - Create a 2D array  
 `Utils.make_2d_array(width, height, default_value = null) -> Array`
