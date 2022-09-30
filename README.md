@@ -102,4 +102,4 @@ Usage:
 - Clamps a control node to viewport  
 `Utils.clamp_to_viewport(viewport, control, margin = 0.0) -> void`
 - Get a random point in polygon
-`get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2`
+`Utils.get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2`

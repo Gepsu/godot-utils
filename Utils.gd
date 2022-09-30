@@ -4,8 +4,7 @@ class_name Utils
 ## Returns file names in folder
 static func get_files_in_folder(path: String, extension: String = "", full_path: bool = false, starts_with: String = "", max_items: int = 999) -> Array:
 	var files = []
-	var dir = Directory.new()
-	dir.open(path)
+	var dir = DirAccess.open(path)
 	
 	dir.list_dir_begin()
 	var file = dir.get_next()
