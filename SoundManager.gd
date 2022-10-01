@@ -8,14 +8,16 @@ enum PlayOrder {
 	Random,
 }
 
-var play_order: int
-var playlist: Array[AudioStream]
-var current_song: int
-
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	bus = music_bus
 	finished.connect(play_next)
+
+# Music
+
+var play_order: int
+var playlist: Array[AudioStream]
+var current_song: int
 
 func play_through(playlist: Array[AudioStream], play_order: int = PlayOrder.InOrder) -> void:
 	stop()
@@ -45,21 +47,25 @@ func play_next() -> void:
 	stream = playlist[current_song]
 	play()
 
-func play_sound(sound: AudioStream, volume := 1.0) -> void:
+# Sound Effects
+
+func play_sound(sound: AudioStream, volume := 1.0, pitch_shift := 0.0) -> void:
 	var sound_effects = AudioStreamPlayer.new()
 	add_child(sound_effects)
 	sound_effects.bus = effect_bus
 	sound_effects.stream = sound
 	sound_effects.volume_db = linear_to_db(volume)
+	sound_effects.pitch_scale = 1.0 + randf_range(-pitch_shift, pitch_shift)
 	sound_effects.finished.connect(sound_effects.queue_free)
 	sound_effects.play()
 
-func play_directional_sound(sound: AudioStream, position: Vector2, volume := 1.0) -> void:
+func play_directional_sound(sound: AudioStream, position: Vector2, volume := 1.0, pitch_shift := 0.0) -> void:
 	var sound_effects = AudioStreamPlayer2D.new()
 	add_child(sound_effects)
 	sound_effects.bus = effect_bus
 	sound_effects.stream = sound
 	sound_effects.volume_db = linear_to_db(volume)
+	sound_effects.pitch_scale = 1.0 + randf_range(-pitch_shift, pitch_shift)
 	sound_effects.finished.connect(sound_effects.queue_free)
 	sound_effects.global_position = position
 	sound_effects.play()
