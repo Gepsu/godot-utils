@@ -49,10 +49,13 @@ Yet another simple script for your sounds! Play music or sound effects
 
 Usage:
 - Should be used as a singleton
-- Create a playlist and call `SoundManager.play_through(playlist: Array[AudioStream], play_order = PlayOrder.InOrder)`
+- Create a playlist and call  
+`SoundManager.play_through(playlist: Array[AudioStream], play_order = PlayOrder.InOrder)`
 - You can call `SoundManager.play_next()` to skip song altho this will be called automatically when the previous song ends
-- For sound effects you can call either `SoundManager.play_sound(sound: AudioStream, volume = 1.0, pitch_shift := 0.0)`
-- Or if you want it to be directional then use `SoundManager.play_directional_sound(sound: AudioStream, position: Vector2, volume = 1.0, pitch_shift := 0.0)`
+- For sound effects you can call either  
+`SoundManager.play_sound(sound: AudioStream, volume = 1.0, pitch_shift := 0.0)`
+- Or if you want it to be directional then use  
+`SoundManager.play_directional_sound(sound: AudioStream, position: Vector2, volume = 1.0, pitch_shift := 0.0)`
 
 <br>
 
