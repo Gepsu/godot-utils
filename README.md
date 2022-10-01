@@ -12,7 +12,7 @@ A set of short and simple scripts and functions that vary from not useful at all
 
 ---
 
-🎵 <b id="areasound">AreaSound.gd</b>  
+🎵 <b id="areasound"><a href="https://github.com/Gepsu/godot-utils/blob/master/AreaSound.gd">AreaSound.gd</a></b>  
 A sound class that plays sounds in certain areas of the game when a node that is being followed enters them
 
 Usage:
@@ -21,7 +21,7 @@ Usage:
 
 <br>
 
-✏️ <b id="debuglabel">DebugLabel.gd</b>   
+✏️ <b id="debuglabel"><a href="https://github.com/Gepsu/godot-utils/blob/master/DebugLabel.gd">DebugLabel.gd</a></b>   
 A simple label class that lists everything you want to see
 
 Usage:
@@ -33,7 +33,7 @@ https://docs.godotengine.org/en/latest/tutorials/scripting/gdscript/gdscript_for
 
 <br>
 
-📦 <b id="prefab">Prefab.gd</b>  
+📦 <b id="prefab"><a href="https://github.com/Gepsu/godot-utils/blob/master/Prefab.gd">Prefab.gd</a></b>  
 A prefab class that takes existing sets of nodes in your scene and packs them into a neat little package that can be pasted later. Think copy paste but better
 
 Usage:
@@ -43,7 +43,7 @@ Usage:
 
 <br>
 
-🎵 <b id="soundmanager">SoundManager.gd</b>  
+🎵 <b id="soundmanager"><a href="https://github.com/Gepsu/godot-utils/blob/master/SoundManager.gd">SoundManager.gd</a></b>  
 Yet another simple script for your sounds! Play music or sound effects
 
 Usage:
@@ -54,7 +54,7 @@ Usage:
 
 <br>
 
-🏊 <b id="pool">ObjectPool.gd</b>  
+🏊 <b id="pool"><a href="https://github.com/Gepsu/godot-utils/blob/master/ObjectPool.gd">ObjectPool.gd</a></b>  
 A class that stores objects in it for later use, cutting out loading new objects (unless you want more than what's in there) and hopefully giving you a couple more frames. While they're in the pool, all the process functions are disabled
 
 Usage:
@@ -66,7 +66,7 @@ Usage:
 
 <br>
 
-🤖 <b id="statemachine">StateMachine.gd</b>  
+🤖 <b id="statemachine"><a href="https://github.com/Gepsu/godot-utils/blob/master/StateMachine.gd">StateMachine.gd</a></b>  
 A simple helper class for switching states and running functions
 
 Usage:
@@ -85,7 +85,7 @@ Usage:
 
 <br>
 
-🤷 <b id="utils">Utils.gd</b>  
+🤷 <b id="utils"><a href="https://github.com/Gepsu/godot-utils/blob/master/Utils.gd">Utils.gd</a></b>  
 A script full of simple static functions
 
 Usage:
@@ -101,5 +101,5 @@ Usage:
 `Utils.numbers_are_close(a, b, threshold) -> bool`
 - Clamps a control node to viewport  
 `Utils.clamp_to_viewport(viewport, control, margin = 0.0) -> void`
-- Get a random point in polygon
+- Get a random point in polygon  
 `Utils.get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2`

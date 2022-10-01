@@ -1,14 +1,12 @@
 class_name AreaSound extends Polygon2D
 
-# Plays sounds in certain areas when the node that is being followed enters them
-
 @export var sound: AudioStream
-@export_enum("Master", "Music", "Effect", "Ambience") var bus: int = 3
+@export_enum("Master", "Music", "Effects", "Ambience") var bus: int = 3 # You'll have to rename these yourself
 @export var volume: float = 0.0 # ranges from -80 to +6 for some reason
 @export_range(0.0, 60.0) var fade_in = 1.0
 @export_range(0.0, 60.0) var fade_out = 5.0
+@export var following_node: Node2D
 
-@onready var following_node: Node2D
 var stream: AudioStreamPlayer
 var tween: Tween
 var playing: bool = false:
@@ -30,9 +28,6 @@ func _ready() -> void:
 	stream.bus = AudioServer.get_bus_send(bus)
 	add_child(stream)
 	stream.play()
-
-func set_following(what: Node2D) -> void:
-	following_node = what
 
 func _process(delta: float) -> void:
 	if is_instance_valid(following_node):
