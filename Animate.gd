@@ -6,7 +6,7 @@ static func _is_valid(node) -> bool:
 		return false
 	return true
 
-static func bounce_scale(node, _signal: Signal, target_scale: Vector2, duration := 0.1, trans: int = Tween.TRANS_BOUNCE) -> void:
+static func scale(node, _signal: Signal, target_scale: Vector2, duration := 0.1, trans: int = Tween.TRANS_BOUNCE) -> void:
 	if not _is_valid(node): return
 	
 	_signal.connect(func(): 
