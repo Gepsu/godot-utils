@@ -51,6 +51,11 @@ static func clamp_to_viewport(viewport: Viewport, control: Control, margin: floa
 	control.global_position.x = clamp(control.global_position.x, margin, viewport.get_visible_rect().end.x - control.size.x * 2 - margin)
 	control.global_position.y = clamp(control.global_position.y, margin, viewport.get_visible_rect().end.y - control.size.y * 2 - margin)
 
+## Better connect function
+static func reconnect(_signal: Signal, callable: Callable, flags := 0) -> void:
+	if _signal.is_connected(callable):
+		_signal.disconnect(callable)
+	_signal.connect(callable, flags)
 ## Blatantly stolen from: https://observablehq.com/@scarysize/finding-random-points-in-a-polygon Thank you!
 static func get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2:
 	# Get triangles
