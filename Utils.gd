@@ -1,5 +1,4 @@
-extends Node
-class_name Utils
+class_name Utils extends Node
 
 ## Returns file names in folder
 static func get_files_in_folder(path: String, extension: String = "", full_path: bool = false, starts_with: String = "", max_items: int = 999) -> Array:
@@ -56,6 +55,15 @@ static func reconnect(_signal: Signal, callable: Callable, flags := 0) -> void:
 	if _signal.is_connected(callable):
 		_signal.disconnect(callable)
 	_signal.connect(callable, flags)
+
+## Better pivot offset. Sets it according to the size. How much could be either a Vector2 or float
+static func offset_pivot(control: Control, how_much = Vector2.ZERO) -> void:
+	if not (how_much is float or how_much is Vector2):
+		printerr("Set the pivot offset value to either Vector2 or a float!")
+		return
+	if how_much is float: how_much = Vector2.ONE * how_much
+	control.pivot_offset = control.size * how_much
+
 ## Blatantly stolen from: https://observablehq.com/@scarysize/finding-random-points-in-a-polygon Thank you!
 static func get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2:
 	# Get triangles
