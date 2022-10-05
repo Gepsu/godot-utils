@@ -2,6 +2,7 @@
 A set of short and simple scripts and functions that vary from not useful at all to eh this will save me a line of code. If you have ideas for more feel free to let me know. I will update this as i go 🙂
 
 **Contents**
+- <a href=#animate>Animate</a>
 - <a href=#areasound>Area Sound</a>
 - <a href=#debuglabel>Debug Label</a>
 - <a href=#prefab>Prefab</a>
@@ -11,6 +12,23 @@ A set of short and simple scripts and functions that vary from not useful at all
 - <a href=#utils>Utils</a>
 
 ---
+
+🦾 <b id="animate"><a href="https://github.com/Gepsu/godot-utils/blob/master/Animate.gd">Animate.gd</a></b>  
+Animate class for simple tween animations quickly and effortlessly. This allows you to tween properties either right on call or set it to be called via a signal. I will be making some wild premade animations and share them here some day in the future...
+
+Usage:
+- Call this to create the tween followed by either `.play()` or `.on_signal(Signal)`  
+`Animate.property(object: Object, property: NodePath, final_val, duration := 1.0, trans := Tween.TRANS_LINEAR)`
+
+Example:
+```
+# Adds a scale up/down tween to a button on mouse_entered and mouse_exited signal
+func _ready() -> void:
+	Animate.property($Button, "scale", Vector2.ONE * 1.1, 0.1, Tween.TRANS_BOUNCE).on_signal($Button.mouse_entered)
+	Animate.property($Button, "scale", Vector2.ONE, 0.1, Tween.TRANS_BOUNCE).on_signal($Button.mouse_exited)
+```
+
+<br>
 
 🎵 <b id="areasound"><a href="https://github.com/Gepsu/godot-utils/blob/master/AreaSound.gd">AreaSound.gd</a></b>  
 A sound class that plays sounds in certain areas of the game when a node that is being followed enters them
@@ -85,13 +103,32 @@ Usage:
 	- Note that these can be chained together one after the other `.set_input(blah).set_physics_process(bleh)...`
 - The state machine will run these through the appropriate functions and come with both `delta` and `InputEvent`
 - To change states you call `sm.change_state(state: Variant)`
-- Here's an example image of the state machine in action
-![image](https://user-images.githubusercontent.com/28844450/192623238-a6266427-e931-41be-8269-5406fc91894a.png)
+
+Example:
+```
+func _ready() -> void:
+	sm = StateMachine.new(self)
+	sm.add_state(State.Ground).set_physics_process(ground).set_input(ground_input)
+	sm.add_state(State.Air).set_physics_process(air)
+	sm.add_state(State.HurtWall).set_physics_process(hurt_wall)
+	sm.add_state(State.HurtAir).set_physics_process(hurt_air)
+	sm.add_state(State.HurtGround).set_physics_process(hurt_ground)
+	sm.change_state(State.Air)
+	
+func ground_input(event: InputEvent) -> void:
+	# Handle Jump.
+	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+
+func ground(delta: float) -> void:
+	add_gravity(delta)
+	...
+```
 
 <br>
 
 🤷 <b id="utils"><a href="https://github.com/Gepsu/godot-utils/blob/master/Utils.gd">Utils.gd</a></b>  
-A script full of simple static functions
+A script full of simple and sometimes random static functions
 
 Usage:
 - Get file names in folder  
@@ -106,5 +143,9 @@ Usage:
 `Utils.numbers_are_close(a, b, threshold) -> bool`
 - Clamps a control node to viewport  
 `Utils.clamp_to_viewport(viewport, control, margin = 0.0) -> void`
+- Simple reconnect function for reconnecting (or just connecting) signals  
+`Utils.reconnect(_signal: Signal, callable: Callable, flags := 0) -> void`
+- Better pivot offset. Sets it according to the size. How much could be either a Vector2 or float  
+`Utils.offset_pivot(control: Control, how_much = Vector2.ZERO) -> void`
 - Get a random point in polygon  
 `Utils.get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2`
