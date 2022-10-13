@@ -47,8 +47,10 @@ static func numbers_are_close(a: float, b: float, threshold: float) -> bool:
 
 ## Clamps control nodes to viewport
 static func clamp_to_viewport(viewport: Viewport, control: Control, margin: float = 0.0) -> void:
-	control.global_position.x = clamp(control.global_position.x, margin, viewport.get_visible_rect().end.x - control.size.x * 2 - margin)
-	control.global_position.y = clamp(control.global_position.y, margin, viewport.get_visible_rect().end.y - control.size.y * 2 - margin)
+	control.global_position = control.global_position.clamp(
+		Vector2.ONE * margin, 
+		viewport.get_visible_rect().end - control.size - Vector2.ONE * margin
+	)
 
 ## Better connect function
 static func reconnect(_signal: Signal, callable: Callable, flags := 0) -> void:
