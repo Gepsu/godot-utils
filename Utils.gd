@@ -112,3 +112,43 @@ static func get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2:
 	var r_x = rb_x + rc_x + tri[0].x
 	var r_y = rb_y + rc_y + tri[0].y
 	return Vector2(r_x, r_y)
+
+## Enumerable
+static func enumerate(array: Array, start: int = 0, end: int = array.size(), step: int = 1) -> Enumerable:
+	return Enumerable.new(array, start, end, step)
+
+class Enumerable extends Resource:
+	var array: Array
+	var start: int
+	var end: int
+	var step: int
+	var count: int: get = get_index
+	var idx: int: get = get_index
+	var current: get = get_item
+	var item: get = get_item
+	
+	func _init(array: Array, start: int, end: int, step: int) -> void:
+		self.array = array
+		self.start = clamp(start, 0, array.size())
+		self.end = min(end, array.size())
+		self.step = max(1, step)
+		
+	func get_index() -> int:
+		return idx
+	
+	func get_item():
+		return array[idx]
+		
+	func should_continue():
+		return idx < end
+	
+	func _iter_init(arg):
+		idx = start
+		return should_continue()
+	
+	func _iter_next(arg):
+		idx += step
+		return should_continue()
+	
+	func _iter_get(arg):
+		return self
