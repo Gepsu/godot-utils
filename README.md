@@ -28,6 +28,14 @@ func _ready() -> void:
 	Animate.property($Button, "scale", Vector2.ONE, 0.1, Tween.TRANS_BOUNCE).on_signal($Button.mouse_exited)
 ```
 
+Presets:
+- Scales between start and end value till stop signal is emitted  
+`Animate.pulse_scale(object, start_val, end_val, stop_signal: Signal, duration := 1.0, trans := Tween.TRANS_SINE, ease := Tween.EASE_IN_OUT)`
+- Rotates left and right by given degree till stop signal is emitted  
+`Animate.swing(object, rotation_degrees: float, stop_signal: Signal, duration := 1.0, trans := Tween.TRANS_SINE, ease := Tween.EASE_IN_OUT)`
+- Goes through all colors till stop signal is emitted  
+`Animate.rainbow(object: CanvasItem, stop_signal: Signal, saturation := 1.0, duration := 1.0)`
+
 <br>
 
 🎵 <b id="areasound"><a href="https://github.com/Gepsu/godot-utils/blob/master/AreaSound.gd">AreaSound.gd</a></b>  
@@ -149,3 +157,7 @@ Usage:
 `Utils.offset_pivot(control: Control, how_much = Vector2.ZERO) -> void`
 - Get a random point in polygon  
 `Utils.get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2`
+- Iterates through the array returning an enumerable that contains the current item and index.  
+Current item is stored in `i.item` and `i.current` variables as well as `i.get_item()`.  
+Current index is stored in `i.idx` and `i.count` variables as well as `i.get_index()`.  
+`for i in Utils.enumerate(array, start = 0, end = array.size(), step = 1)`
