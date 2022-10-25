@@ -103,6 +103,8 @@ A simple helper class for switching states and running functions
 Usage:
 - You create your state machine by calling `var sm = StateMachine.new(self)` in the script you wanna use the state machine in
 - You add different states to it by using the `sm.add_state(state: Variant)` function, followed by one of the these:
+	- `.set_entered(enter_function: Callable)`
+	- `.set_exited(exit_functions: Callable)`
 	- `.set_input(input_function: Callable)`
 	- `.set_unhandled_input(unhandled_input_function: Callable)`
 	- `.set_unhandled_key_input(unhandled_key_input_function: Callable)`
@@ -116,7 +118,11 @@ Example:
 ```
 func _ready() -> void:
 	sm = StateMachine.new(self)
-	sm.add_state(State.Ground).set_physics_process(ground).set_input(ground_input)
+	sm.add_state(State.Ground) \
+		.set_physics_process(ground) \
+		.set_input(ground_input) \
+		.set_entered(ground_entered) \
+		.set_exited(ground_exited)
 	sm.add_state(State.Air).set_physics_process(air)
 	sm.add_state(State.HurtWall).set_physics_process(hurt_wall)
 	sm.add_state(State.HurtAir).set_physics_process(hurt_air)
