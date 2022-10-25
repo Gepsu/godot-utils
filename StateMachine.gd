@@ -3,6 +3,7 @@ class_name StateMachine extends Node
 var _states: Dictionary
 var _current_state: StateFunctions
 var _state
+var _stack: Array
 
 func _init(parent: Node) -> void:
 	parent.add_child(self)
@@ -17,11 +18,20 @@ func add_state(state) -> StateFunctions:
 	return _states[state]
 
 func change_state(state) -> void:
-	if not _states.has(state):
+	if not _states.has(state) or _state == state:
 		return
 	
-	_states[state]._toggle_functions(self)
+	# Exit call
+	if _current_state and _current_state.exited.is_valid():
+		_current_state.exited.call()
+		
 	_current_state = _states[state]
+	
+	# Enter call
+	if _current_state.entered.is_valid():
+		_current_state.entered.call()
+		
+	_current_state._toggle_functions(self)
 	_state = state
 
 func get_state():
@@ -48,7 +58,10 @@ class StateFunctions:
 	var unhandled_key_input: Callable
 	var physics_process: Callable
 	var process: Callable
+	var entered: Callable
+	var exited: Callable
 	
+	# Disable unused functions
 	func _toggle_functions(sm: StateMachine) -> void:
 		sm.set_process_input(input.is_valid())
 		sm.set_process_unhandled_input(unhandled_input.is_valid())
@@ -74,4 +87,12 @@ class StateFunctions:
 	
 	func set_process(_process: Callable) -> StateFunctions:
 		self.process = _process
+		return self
+	
+	func set_entered(_entered: Callable) -> StateFunctions:
+		self.entered = _entered
+		return self
+	
+	func set_exited(_exited: Callable) -> StateFunctions:
+		self.exited = _exited
 		return self
