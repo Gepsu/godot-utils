@@ -161,6 +161,8 @@ Usage:
 `Utils.reconnect(_signal: Signal, callable: Callable, flags := 0) -> void`
 - Better pivot offset. Sets it according to the size. How much could be either a Vector2 or float  
 `Utils.offset_pivot(control: Control, how_much = Vector2.ZERO) -> void`
+- Prints your array in a more readable fashion  
+`Utils.print_array(array: Array) -> void`
 - Get a random point in polygon  
 `Utils.get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2`
 - Iterates through the array returning an enumerable that contains the current item and index.  

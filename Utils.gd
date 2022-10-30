@@ -67,6 +67,13 @@ static func offset_pivot(control: Control, how_much = Vector2.ZERO) -> void:
 		how_much = Vector2.ONE * how_much
 	control.pivot_offset = control.size * how_much
 
+## Prints an array in a more readable fashion
+static func print_array(array: Array) -> void:
+	var s := ""
+	for i in array:
+		s += str(i) + "\n"
+	print(s.trim_suffix("\n"))
+
 ## Blatantly stolen from: https://observablehq.com/@scarysize/finding-random-points-in-a-polygon Thank you!
 static func get_random_point_in_polygon(polygon: PackedVector2Array) -> Vector2:
 	# Get triangles
